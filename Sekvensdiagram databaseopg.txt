@@ -1,0 +1,13 @@
+@startuml
+actor Bruger
+participant "Main Program" as Program
+database "HotelDbContext" as DbContext
+
+Bruger -> Program : Vælg 'Tilføj Hotel'
+Program -> DbContext : TilføjData()
+activate DbContext
+DbContext -> Program : Returner resultat
+deactivate DbContext
+Program -> Bruger : Vis resultat
+
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+entity "Hotel" {
+    * HotelID: INT [PK]
+    * Navn: VARCHAR(100)
+    * Adresse: VARCHAR(200)
+}
+
+entity "Facilitet" {
+    * FacilitetID: INT [PK]
+    * Beskrivelse: VARCHAR(200)
+}
+
+entity "Kunde" {
+    * KundeID: INT [PK]
+    * Navn: VARCHAR(100)
+    * Email: VARCHAR(100)
+}
+
+entity "Værelse" {
+    * VærelseID: INT [PK]
+    - HotelID: INT [FK]
+    * Nummer: VARCHAR(50)
+    * Type: VARCHAR(50)
+    * Pris: DECIMAL(10, 2)
+}
+
+entity "Reservation" {
+    * ReservationID: INT [PK]
+    - KundeID: INT [FK]
+    - VærelseID: INT [FK]
+    * StartDato: DATE
+    * SlutDato: DATE
+}
+
+entity "Hotelfacilitet" {
+    - HotelID: INT [FK]
+    - FacilitetID: INT [FK]
+}
+
+Hotel ||--o{ Værelse
+Hotel ||--o{ Hotelfacilitet
+Facilitet ||--o{ Hotelfacilitet
+Kunde ||--o{ Reservation
+Værelse ||--o{ Reservation
+
+@enduml
